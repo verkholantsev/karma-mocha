@@ -1,6 +1,18 @@
+var _m = new Mocha({reporter: 'base'});
+
+var wrapper = function(error) {
+  return {
+    err: error,
+    fullTitle: function () {return '';}
+  };
+};
+
 var formatError = function(error) {
   var stack = error.stack;
   var message = error.message;
+
+  _m._reporter.list([wrapper(error)]);
+  return '';
 
   if (stack) {
     var firstLine = stack.substring(0, stack.indexOf('\n'));
